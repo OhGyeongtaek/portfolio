@@ -45,7 +45,8 @@ header {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid rgba(255, 255, 255, 0.7);
-  padding: 8px;
+  padding: 8px 20px;
+  z-index: 100;
 }
 header nav .nav {
   width: 350px;
