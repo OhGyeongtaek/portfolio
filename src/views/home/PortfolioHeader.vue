@@ -3,17 +3,17 @@
     <h1><a href="#">OGT PORTFOLIO</a></h1>
     <nav>
       <ul class="nav">
-        <li class="nav-item">
-          <a href="#">HOME</a>
+        <li class="nav-item" >
+          <a href="#" v-on:click.prevent="() => nav(1)">HOME</a>
         </li>
         <li class="nav-item">
-          <a href="#">SKILLS</a>
+          <a href="#" v-on:click.prevent="() => nav(2)">SKILLS</a>
         </li>
         <li class="nav-item">
-          <a href="#">PORTFOLIO</a>
+          <a href="#" v-on:click.prevent="() => nav(3)">PORTFOLIO</a>
         </li>
         <li class="nav-item">
-          <a href="#">CONTACT AS</a>
+          <a href="#" v-on:click.prevent="() => nav(4)">CONTACT AS</a>
         </li>
       </ul>
     </nav>
@@ -21,10 +21,16 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Emit } from "vue-property-decorator";
 
 @Component
-export default class PortfolioHeader extends Vue {}
+export default class PortfolioHeader extends Vue {
+
+  @Emit()
+  private nav(page: number) {
+    return page;
+  }
+}
 </script>
 
 <style>
