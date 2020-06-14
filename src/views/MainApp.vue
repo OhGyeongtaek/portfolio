@@ -3,22 +3,22 @@
     <div id="home">
       <portfolio-header @nav="navClickHandler"></portfolio-header>
       <div id="content">
-        <ul class="content-list" :data-page="page">
+        <ul class="content-list" :data-page="newPage">
           <!-- welcome -->
-          <li class="welcome" v-if="page === 1">
-            <welcome></welcome>
+          <li>
+            <component :is="welcome" v-if="pageCheck(1)"></component>
           </li>
           <!-- My skills -->
           <li>
-            <h1>스킬!!</h1>
+            <component :is="skills" v-if="pageCheck(2)"></component>
           </li>
           <!-- portfolio -->
           <li>
-            <h1>포폴!!</h1>
+            <component :is="portfolio" v-if="pageCheck(3)"></component>
           </li>
           <!-- contact as -->
           <li>
-            <h1>컨텍트!!</h1>
+            <component :is="contact" v-if="pageCheck(4)"></component>
           </li>
         </ul>
       </div>
@@ -28,30 +28,34 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import PortfolioHeader from "@/views/home/PortfolioHeader.vue";
-import Welcome from "@/views/home/Welcome.vue";
 
 @Component({
-  components: { PortfolioHeader, Welcome }
+  components: { PortfolioHeader }
 })
 export default class MainApp extends Vue {
-  private page = 1;
-  private pageImport = {
-    page1: false,
-    page2: false,
-    page3: false,
-    page4: false
-  };
+  private oldPage = 1;
+  private newPage = 1;
+
+  private readonly skills = () => this.pageLoader("Skills");
+  private readonly welcome = () => this.pageLoader("Welcome");
+  private readonly contact = () => this.pageLoader("Contact");
+  private readonly portfolio = () => this.pageLoader("Portfolio");
+
+  private pageLoader(name: string) {
+    return import(`@/views/home/${name}.vue`);
+  }
 
   private created() {
-    //
+    // console.log(Pages);
   }
 
   public navClickHandler(pageNo: number) {
-    if (pageNo === 1) {
-      // this.pageImport.page1 = true;
-      // console.log(Vue.components);
-    }
-    this.page = pageNo;
+    this.oldPage = this.newPage;
+    this.newPage = pageNo;
+  }
+
+  private pageCheck(pageNo: number) {
+    return pageNo === this.oldPage || pageNo === this.newPage;
   }
 }
 </script>
@@ -82,19 +86,21 @@ html {
   width: 400vw;
   display: flex;
   position: absolute;
-  transition: left 0.5s;
+  transition: all 0.5s;
+  left: 0%;
+  right: 0%;
 }
 .content-list[data-page="1"] {
-  left: 0%;
+  left: 0vw;
 }
 .content-list[data-page="2"] {
-  left: -100%;
+  left: -100vw;
 }
 .content-list[data-page="3"] {
-  left: -200%;
+  left: -200vw;
 }
 .content-list[data-page="4"] {
-  left: -300%;
+  left: -300vw;
 }
 .content-list > li {
   width: 100vw;
