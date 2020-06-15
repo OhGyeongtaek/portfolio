@@ -34,7 +34,7 @@ export default class Welcome extends Vue {
   justify-content: center;
 }
 .welcome > h2 {
-  width: 50%;
+  width: 80%;
   font-size: 3.2rem;
   color: #fff;
   margin: 0 auto;
@@ -63,6 +63,9 @@ export default class Welcome extends Vue {
   border-radius: 20px;
 }
 @media (max-width: 500px) {
+  .welcome {
+    margin-top: 70px;
+  }
   .welcome > .welcome-text-mobile {
     width: 100%;
     display: block;

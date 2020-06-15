@@ -72,10 +72,10 @@ html {
   background-repeat: no-repeat;
   background-image: url("../assets/static/images/header.jpg");
 }
-.content {
+#content {
   width: 100vw;
-  height: 100vh;
-  min-height: 100vh;
+  height: 90vh;
+  min-height: 90vh;
   position: relative;
   overflow: hidden;
 }
@@ -103,6 +103,9 @@ html {
   left: -300vw;
 }
 .content-list > li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100vw;
   height: 90vh;
 }
